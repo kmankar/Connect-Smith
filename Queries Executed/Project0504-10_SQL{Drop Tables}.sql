@@ -1,0 +1,9 @@
+DROP table Certification;
+DROP table AlumnusSkill;
+DROP table EventsAttendance;
+DROP table Donate;
+DROP table Event;
+DROP table Work;
+DROP table Project;
+DROP table Company;
+DROP table Alumnus;
