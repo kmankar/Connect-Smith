@@ -1,0 +1,62 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "Smith";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "select alumFName,alumLName,alumEmail,alumGender,compName
+from Alumnus a
+join Work w ON w.uID = a.uID
+join Company c ON w.compID = c.compID
+where a.alumBatch=2017
+order by alumLName,alumFName
+";
+$result = $conn->query($sql);
+
+?>
+<html>
+<body>
+<h1 align="center">Alumni Details</h1>
+<table border="1" align="center" style="line-height:25px;">
+<tr>
+<th>First Name </th>
+<th>Last Name</th>
+<th>Email</th>
+<th>Gender</th>
+<th>Company Name</th>
+</tr>
+<?php
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+		?>
+		<tr>
+		<td><?php echo $row["alumFName"]; ?></td>
+		<td><?php echo $row["alumLName"]; ?></td>
+		<td><?php echo $row["alumEmail"]; ?></td>
+		<td><?php echo $row["alumGender"]; ?></td>
+		<td><?php echo $row["compName"]; ?></td>
+		</tr>
+		<?php
+	}
+}
+else
+{
+	?>
+	<tr>
+	<th colspan="2"> There is no data found!!!</th>
+	</tr>
+	<?php
+}
+?>
+</table>
+<body>
+<html>
